@@ -16,7 +16,7 @@ prostata_table.cov()
 #vis
 sns.jointplot(x="lcavol", y="lweight", data=prostata_table)
 
-#regression
+#univariate regression
 X_one = prostata_table[['lcavol']]
 X_one = sm.add_constant(X_one)
 Y_one = prostata_table[['lpsa']]
@@ -37,7 +37,7 @@ print('R2: ', result1.rsquared)
 print(result1.t_test(["const = 0"]))
 print(result1.t_test(["lcavol = 0"]))
 
-#more vis
+#More vis
 fig1 = plt.figure()
 plt.scatter(X_one['lcavol'], Y_one, label='data scatter', color='blue')
 plt.plot(X_one['lcavol'], Y_pred_one, label='regression equation', color='red', linewidth=2.0,)
@@ -49,7 +49,7 @@ plt.xlim(-2,4.5)
 plt.ylim(-1,6)
 plt.show()
 
-#reg 2
+#MLR
 X = prostata_table[['lcavol','lweight','age','lbph','svi','lcp','gleason','pgg45']]
 X = sm.add_constant(X)
 Y = prostata_table[['lpsa']]
@@ -58,8 +58,8 @@ result = reg.fit()
 print(result.summary())
 
 #key info
-print('Parameters: ', result.params)
-print('Standard errors: ', result.bse)
+print('Parameters: \n', result.params)
+print('Standard errors:  \n', result.bse)
 print('R2: ', result.rsquared)
 
 
